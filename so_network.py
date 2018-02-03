@@ -150,7 +150,7 @@ if similarities == "0":
         graph_2 = [x for x in graphs[i+1].nodes if any(graphs[i+1].neighbors(x))]
         common_nodes = set(graph_1).intersection(graph_2)
         graph_pairs.append( dict( (source_id, [list(graphs[i].edges(source_id)), list(graphs[i+1].edges(source_id)) ]) for source_id in common_nodes) )
-    print(graph_pairs[0])
+    #print(graph_pairs[0])
 
     # Graph creation
     # sub_graphs is a list of graphs for each time interval
@@ -246,7 +246,7 @@ if similarities == "0":
         top_edges_successes = []
         # Calculate success rate for each pair of graphs
         for i in range(0, N-1):
-            top_int = int(sub_graphs[i].size()*top)
+            top_int = int(sub_graphs[i].size()*top/100)
             max_dict = {}
             # Find max similarity measure for each key's edges
             for key, value in similarity_measures_dicts[measure][i].items():
