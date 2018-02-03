@@ -62,6 +62,7 @@ if centralities == "0":
         degree_centrality.append(nx.degree_centrality(graphs[i]))
         plt.bar(range(len(degree_centrality[i])), list(degree_centrality[i].values()), align='center')
         plt.xticks(range(len(degree_centrality[i])), list(degree_centrality[i].keys()))
+        plt.figure(figsize=(20,10))
         plt.title("Graph " + str(i))
         plt.ylabel('Degree Centrality')
         plt.show()
@@ -72,6 +73,7 @@ if centralities == "0":
         in_degree_centrality.append(nx.in_degree_centrality(graphs[i]))
         plt.bar(range(len(in_degree_centrality[i])), list(in_degree_centrality[i].values()), align='center')
         plt.xticks(range(len(in_degree_centrality[i])), list(in_degree_centrality[i].keys()))
+        plt.figure(figsize=(20,10))
         plt.title("Graph " + str(i))
         plt.ylabel('In-Degree Centrality')
         plt.show()
@@ -82,6 +84,7 @@ if centralities == "0":
         out_degree_centrality.append(nx.out_degree_centrality(graphs[i]))
         plt.bar(range(len(out_degree_centrality[i])), list(out_degree_centrality[i].values()), align='center')
         plt.xticks(range(len(out_degree_centrality[i])), list(out_degree_centrality[i].keys()))
+        plt.figure(figsize=(20,10))
         plt.title("Graph " + str(i))
         plt.ylabel('Out-Degree Centrality')
         plt.show()
@@ -92,6 +95,7 @@ if centralities == "0":
         closeness_centrality.append(nx.closeness_centrality(graphs[i]))
         plt.bar(range(len(closeness_centrality[i])), list(closeness_centrality[i].values()), align='center')
         plt.xticks(range(len(closeness_centrality[i])), list(closeness_centrality[i].keys()))
+        plt.figure(figsize=(20,10))
         plt.title("Graph " + str(i))
         plt.ylabel('Clossness Centrality')
         plt.show()
@@ -102,6 +106,7 @@ if centralities == "0":
         betweenness_degree_centrality.append(nx.betweenness_centrality(graphs[i]))
         plt.bar(range(len(betweenness_degree_centrality[i])), list(betweenness_degree_centrality[i].values()), align='center')
         plt.xticks(range(len(betweenness_degree_centrality[i])), list(betweenness_degree_centrality[i].keys()))
+        plt.figure(figsize=(20,10))
         plt.title("Graph " + str(i))
         plt.ylabel('Betweenness Centrality')
         plt.show()
@@ -112,6 +117,7 @@ if centralities == "0":
         eigenvector_degree_centrality.append(nx.eigenvector_centrality_numpy(graphs[i]))
         plt.bar(range(len(eigenvector_degree_centrality[i])), list(eigenvector_degree_centrality[i].values()), align='center')
         plt.xticks(range(len(eigenvector_degree_centrality[i])), list(eigenvector_degree_centrality[i].keys()))
+        plt.figure(figsize=(20,10))
         plt.title("Graph " + str(i))
         plt.ylabel('Eigenvector Centrality')
         plt.show()
@@ -122,6 +128,7 @@ if centralities == "0":
         katz_degree_centrality.append(nx.katz_centrality_numpy(graphs[i]))
         plt.bar(range(len(katz_degree_centrality[i])), list(katz_degree_centrality[i].values()), align='center')
         plt.xticks(range(len(katz_degree_centrality[i])), list(katz_degree_centrality[i].keys()))
+        plt.figure(figsize=(20,10))
         plt.title("Graph " + str(i))
         plt.ylabel('Katz Centrality')
         plt.show()
@@ -135,7 +142,7 @@ if similarities == "0":
     # Graph vars contains only the source nodes since neighbors()
     # returns only succesors nodes and not predeccesors.
     # graph_pairs is a list of dictionaries of the common nodes where
-    # key is the source node and value is a list of size = N-1 containing
+    # key is the source node and value is a list of size 2 containing
     # the edges of source node for each interval.
     graph_pairs = []
     for i in range(0, N - 1):
@@ -143,7 +150,7 @@ if similarities == "0":
         graph_2 = [x for x in graphs[i+1].nodes if any(graphs[i+1].neighbors(x))]
         common_nodes = set(graph_1).intersection(graph_2)
         graph_pairs.append( dict( (source_id, [list(graphs[i].edges(source_id)), list(graphs[i+1].edges(source_id)) ]) for source_id in common_nodes) )
-    #print(graph_pairs[0])
+    print(graph_pairs[0])
 
     # Graph creation
     # sub_graphs is a list of graphs for each time interval
@@ -256,7 +263,7 @@ if similarities == "0":
             for edge in max_dict.keys():
                 if edge in next_interval_edges:
                     successes += 1
-            pair_graph_results.append(successes / len(next_interval_edges))
+            pair_graph_results.append(successes / len(max_dict))
             top_edges_successes.append( (len(max_dict), len(next_interval_edges), successes) )
         similarity_measures_final_results[measure] = pair_graph_results
         top_edges_successes_dict[measure] = top_edges_successes
